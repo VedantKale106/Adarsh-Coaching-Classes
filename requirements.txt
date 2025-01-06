@@ -1,5 +1,4 @@
-flask
-flask-pymongo
+Flask
+Flask-PyMongo
 python-dotenv
-bson
-gunicorn
+pymongo
