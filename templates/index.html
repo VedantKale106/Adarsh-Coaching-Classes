@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Our Coaching Class{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Excel in Your Studies</h1>
+        <p>Expert guidance for SSC, HSC & CET preparation</p>
+        <a href="{{ url_for('contact') }}" class="cta-button" style="color: aliceblue;">Join Now</a>
+    </div>
+</section>
+
+<section id="about" class="about-section">
+    <h2>About Us</h2>
+    <div class="about-content">
+        <div class="about-text">
+            <p>With over 24 years of excellence in education, we provide comprehensive coaching for students from 5th to 12th standard. Our experienced faculty and proven teaching methodology ensure outstanding results.</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>1000+</h3>
+                    <p>Students</p>
+                </div>
+                <div class="stat-item">
+                    <h3>95%</h3>
+                    <p>Success Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Top Rankers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="results" class="results-section">
+    <h2>Our Results</h2>
+    <div class="results-container">
+        {% for result in results %}
+        <div class="result-card">
+            <h3>{{ result.exam_type }} - {{ result.year }}</h3>
+            <div class="result-details">
+                <div>
+                    <p><strong>Class Average:</strong> {{ result.class_average }}%</p>
+                    <p><strong>Total Students:</strong> {{ result.total_students }}</p>
+                    <p><strong>Distinctions:</strong> {{ result.distinctions }}</p>
+                </div>
+                <div>
+                    <p><strong>First Class:</strong> {{ result.first_class }}</p>
+                    <p><strong>Pass Percentage:</strong> {{ result.pass_percentage }}%</p>
+                    <div class="highlights">
+                        <h4>Top Performers:</h4>
+                        <ul>
+                            {% for highlight in result.highlights %}
+                            <li>{{ highlight.name }} - {{ highlight.percentage }}%</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<section id="courses" class="courses-section">
+    <h2>Our Courses</h2>
+    <div class="courses-grid">
+        {% for course in courses %}
+        <div class="course-card">
+            <h3>{{ course.name }}</h3>
+            <p>{{ course.description }}</p>
+            <ul class="features">
+                {% for feature in course.features %}
+                <li>{{ feature }}</li>
+                {% endfor %}
+            </ul>
+            <a href="{{ url_for('contact') }}" class="enroll-btn">Enquire Now</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="faculty" class="faculty-section">
+    <h2>Our Faculty</h2>
+    <div class="faculty-grid">
+        {% for teacher in faculty %}
+        <div class="faculty-card">
+            <div class="faculty-image">
+                <img src="{{ teacher.image_url }}" alt="{{ teacher.name }}" onerror="this.onerror=null;this.src='/static/images/faculty/default.png';">
+            </div>
+            
+            <div class="faculty-info">
+                <h3>{{ teacher.name }}</h3>
+                <p class="qualification">{{ teacher.qualification }}</p>
+                <p class="experience">{{ teacher.experience }} years experience</p>
+                <p class="subjects">{{ teacher.subjects|join(', ') }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
